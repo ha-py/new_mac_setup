@@ -1,0 +1,24 @@
+#### install anaconda
+############### From: https://janlauge.github.io/2018/data-science-machine-and-command-line-setup/
+# May need updating for conda version
+wget -O anaconda.sh https://repo.anaconda.com/archive/Anaconda3-5.3.0-MacOSX-x86_64.sh
+bash anaconda.sh
+rm anaconda.sh
+# append conda path to bash profile
+echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.zshrc
+# reload profile
+source .zshrc
+
+# create new anaconda virtual environments
+conda update conda
+conda config --add channels conda-forge
+conda create --name dev2 python=2.7
+conda create --name dev3 python=3.6
+# and switch to it to avoid using the system python
+source activate dev3
+# do this every time we start a new session
+# assuming you want to use python3 by default
+echo 'source activate dev3' >> ~/.zshrc
+# Install a few libraries that do not ship with anaconda
+pip install awscli tensorflow tensorflow-gpu keras
+

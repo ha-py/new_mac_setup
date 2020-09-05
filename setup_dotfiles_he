@@ -1,0 +1,41 @@
+#!/bin/zsh
+echo "installing homebrew packages"
+./install.sh
+
+echo "updating macos settings"
+./macos/defaults.sh
+
+echo " adjust Dock Icons"
+./macos/dock.sh
+
+echo "setup shell"
+./macos/zsh_setup.sh
+
+echo "################ setup SPACEMACS #####################"
+# backup original emacs config file
+rm -r ~/.emacs.d_backup
+mv ~/.emacs.d ~/.emacs.d_backup
+#download spacemacs config
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+# backup original .spacemacks file
+rm ~/.spacemacs_backup
+mv ~/.spacemacs ~/.spacemacs_backup
+# link in new .spacemacs file
+ln -s ./space_macs/.spacemacs ~/.spacemacs
+
+echo "########## symlinking dotfiles ####################"
+
+cd dotfiles
+for f in .*; do
+    if ! test -f ~/$f; then
+        ln -sv $PWD/$f ~/$f
+        echo "Installed ~/$f" 1>&2
+    else
+        echo "$f already exists" 1>&2
+    fi
+done
+
+TODO
+# Update packages
+# Delete teh ds.store files periodically

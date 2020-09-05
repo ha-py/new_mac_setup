@@ -1,0 +1,21 @@
+#file types to ignore
+# Compiled Python files
+*.pyc
+*.cache
+*.log
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+#folders
+tmp/
+temp/
